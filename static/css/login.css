@@ -1,0 +1,52 @@
+/* Styles globaux */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* S'assurer que le corps remplit l'écran */
+    margin: 0;
+}
+
+.login-section {
+    flex: 1; /* Permet à la section de prendre l'espace restant */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #978e8e;
+}
+
+.footer-area {
+    background-color: #f9f9f9;
+    padding: 20px 0;
+}
+
+/* Styles pour les dégradés */
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fccb90;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #ff7e5f, #feb47b);
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Dégradé de pêche à doré */
+}
+
+@media (min-width: 768px) {
+    .gradient-form {
+        height: 100vh !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+    }
+}
+.card {
+    margin-bottom: 20px; /* Ajoute de l'espace sous la carte */
+}
+
+.login-section {
+    padding-top: 40px; /* Ajoute de l'espace au-dessus de la section de connexion */
+}

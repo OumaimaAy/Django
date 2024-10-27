@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">  <!-- Votre fichier CSS -->
+
+    <title>Inscription</title>
+</head>
+{% block content %}
+<section class="h-100 bg-dark">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="card card-registration my-4">
+          <div class="row g-0">
+            <div class="col-xl-6 d-none d-xl-block">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                alt="Sample photo" class="img-fluid"
+                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+            </div>
+            <div class="col-xl-6">
+              <div class="card-body p-md-5 text-black">
+                <h3 class="mb-5 text-uppercase">Inscription</h3>
+
+                <!-- Afficher les messages de succès ou d'erreur -->
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %} 
+
+                <form method="POST" novalidate>
+                    {% csrf_token %}
+
+                    <div class="row mb-4">
+                        {% for field in form %}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                    {{ field }}                                    
+                                    <!-- Afficher les erreurs spécifiques au champ -->
+                                    {% if field.errors %}
+                                        <div class="text-danger">{{ field.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="d-flex justify-content-end pt-3">
+                      <button type="submit" class="btn btn-primary btn-lg">S'inscrire</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="footer-area bg-light text-dark py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="single-footer-widget">
+                    <h6 class="fw-bold">À Propos</h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+                    <p class="footer-text">
+                        &copy; <span id="currentYear"></span> Tous droits réservés | Créé avec <i class="fa fa-heart" aria-hidden="true"></i> par <a href="https://colorlib.com" target="_blank" class="text-dark">Colorlib</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="single-footer-widget">
+                    <h6 class="fw-bold">Newsletter</h6>
+                    <p>Restez informé de nos dernières nouvelles</p>
+                    <div id="mc_embed_signup">
+                        <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
+                            <input class="form-control me-2" name="EMAIL" placeholder="Entrez votre email" required type="email">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-arrow-right"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="single-footer-widget">
+                    <h6 class="fw-bold">Suivez-nous</h6>
+                    <p>Restons connectés</p>
+                    <div class="footer-social d-flex">
+                        <a href="#" class="text-dark me-2"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="text-dark me-2"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="text-dark me-2"><i class="fa fa-dribbble"></i></a>
+                        <a href="#" class="text-dark"><i class="fa fa-behance"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Met à jour l'année dans le footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
+{% endblock %}

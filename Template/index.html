@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
     
   
 </head>
@@ -34,54 +37,66 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script> 
 
-    <header id="header" class="header" id="home">
-        <div class="container header-top">
-            <div class="row">
-                <div class="col-6 top-head-left">
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><a href="#">Visit Us</a></li>
-                        <li class="list-inline-item"><a href="#">Buy Ticket</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 top-head-right text-right">
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><a href="#" aria-label="Facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li class="list-inline-item"><a href="#" aria-label="Twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li class="list-inline-item"><a href="#" aria-label="Dribbble"><i class="fa fa-dribbble"></i></a></li>
-                        <li class="list-inline-item"><a href="#" aria-label="Behance"><i class="fa fa-behance"></i></a></li>
-                    </ul>
-                </div>
+<header id="header" class="header" id="home">
+    <div class="container header-top">
+        <div class="row">
+            <div class="col-6 top-head-left">
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">Visit Us</a></li>
+                    <li class="list-inline-item"><a href="#">Buy Ticket</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="list-inline-item">hey {{ user }}</li>
+                    {% endif %}
+                </ul>
             </div>
-        </div>
-        <hr>
-        <div class="container">
-            <div class="row align-items-center justify-content-between d-flex">
-                <div id="logo">
-                    <a href="index.html">
-                        <img src="{% static 'img/logo.png' %}" alt="Logo" title="Logo" />
-                    </a>
-                </div>
-                <nav id="nav-menu-container">
-                    <ul class="nav-menu">
-                        <li class="menu-active"><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="event.html">Events</a></li>
-                        <li><a href="ticket.html">Ticket</a></li>
-                        <li><a href="blog-home.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li class="menu-has-children"><a href="#">Pages</a>
-                            <ul>
-                                <li><a href="blog-single.html">Blog Single</a></li>
-                                <li><a href="category.html">Category</a></li>
-                                <li><a href="elements.html">Elements</a></li>
-                            </ul>
+            <div class="col-6 top-head-right text-right">
+                <ul class="list-inline">
+                    {% if user.is_authenticated %}
+                        <li class="list-inline-item">
+                            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
                         </li>
-                    </ul>
-                </nav><!-- #nav-menu-container -->
+                    {% else %}
+                        <li class="list-inline-item">
+                            <a href="{% url 'register' %}" class="btn btn-warning">Register</a>
+                        </li>
+                        <li class="list-inline-item">
+							<a href="{% url 'login' %}" class="btn btn-success">Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
-    </header><!-- #header -->
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row align-items-center justify-content-between d-flex">
+            <div id="logo">
+                <a href="index.html">
+                    <img src="{% static 'img/logo.png' %}" alt="Logo" title="Logo" />
+                </a>
+            </div>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li class="menu-active"><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="event.html">Events</a></li>
+                    <li><a href="ticket.html">Ticket</a></li>
+                    <li><a href="blog-home.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="menu-has-children"><a href="#">Pages</a>
+                        <ul>
+                            <li><a href="blog-single.html">Blog Single</a></li>
+                            <li><a href="category.html">Category</a></li>
+                            <li><a href="elements.html">Elements</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav><!-- #nav-menu-container -->
+        </div>
+    </div>
+</header><!-- #header -->
+
 
 
 			<!-- start banner Area -->
