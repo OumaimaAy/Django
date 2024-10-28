@@ -1,9 +1,19 @@
+.card-registration {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Ombre sombre */
+    border-radius: 0.25rem; /* Pour garder les bords arrondis */
+}
+
+/* Styles supplémentaires que vous avez déjà */
 .card-registration .select-input.form-control[readonly]:not([disabled]) {
     font-size: 1rem;
     line-height: 2.15;
     padding-left: .75em;
     padding-right: .75em;
-    }
-    .card-registration .select-arrow {
+}
+
+.card-registration .select-arrow {
     top: 13px;
-    }
+}
+body {
+    background-color: #ddd9d9; /* Remplacez cette couleur par celle de votre choix */
+}

@@ -11,7 +11,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #978e8e;
+    background-color: #f6f1f1 !important;
 }
 
 .footer-area {
@@ -45,6 +45,9 @@ body {
 }
 .card {
     margin-bottom: 20px; /* Ajoute de l'espace sous la carte */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8); /* Ombre plus sombre et plus marquée */
+    ; /* Ombre sombre */
+    border-radius: 0.25rem; /* Pour garder les bords arrondis */
 }
 
 .login-section {

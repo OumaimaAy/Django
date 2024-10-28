@@ -1,0 +1,96 @@
+    {% load static %}
+
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/event.css' %}"> <!-- Votre fichier CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"></script>
+
+        <style>
+            body {
+                background-color: #edf1f4; /* Fond gris sombre */
+                color: white; /* Couleur de texte par défaut en blanc */
+            }
+            .form-label {
+                color: white !important; /* Forcer les labels en blanc */
+            }
+            
+        </style>
+        <title>Add Event</title>
+    </head>
+    {% block content %}
+    <section class="text-center text-lg-start">
+    <div class="container py-4">
+        <div class="row g-0 align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card bg-dark text-white shadow-5 text-center" style="backdrop-filter: blur(30px); background-color: rgba(0, 0, 0, 0.7); margin-left: -30px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);">
+                
+
+            <div class="card-body p-5">
+                <h2 class="fw-bold mb-5">Add Event</h2>
+                <form action="{% url 'addEvent' %}" method="POST" class="form-group" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Title Input -->
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ form.title.id_for_label }}">Title</label>
+                        {{ form.title }}
+                    </div>
+
+                    <!-- Description Input -->
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ form.description.id_for_label }}">Description</label>
+                        {{ form.description}}
+                    </div>
+
+                    <!-- Image Input -->
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ form.image.id_for_label }}">Image</label>
+                        {{ form.image }}
+                    </div>
+
+                    <!-- Category Input -->
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ form.category.id_for_label }}">Category</label>
+                        {{ form.category}}
+                    </div>
+
+                    <!-- Event Date Input -->
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ form.evt_date.id_for_label }}">Event Date</label>
+                        {{ form.evt_date}}
+                    </div>
+
+                    <!-- Organizer Display -->
+                    <div class="mb-3">
+                        <label class="form-label">Organisateur</label>
+                        <input type="text" class="form-control bg-light text-dark" value="{{ request.user.username }}" readonly />
+                    </div>
+
+                    <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary btn-block">Save</button>
+                </form>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-5 mb-lg-0">
+            <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4" alt="" />
+        </div>
+        </div>
+    </div>
+    </section>
+    
+{% include 'footer.html' %}
+
+
+<script>
+    // Met à jour l'année dans le footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
+
+
+    {% endblock %}

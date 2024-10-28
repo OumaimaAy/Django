@@ -1,0 +1,22 @@
+/* event.css */
+.card {
+    backdrop-filter: blur(30px);
+    background-color: rgba(162, 162, 169, 0.8); /* Augmentez l'opacité pour plus de contraste */
+    border-radius: 15px;
+    padding: 20px;
+}
+.form-label {
+    font-weight: 500;
+    color: #232323; /* Ajuste la couleur pour plus de lisibilité */
+}
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 8px;
+}
+.form-control, .form-select {
+    border-radius: 8px;
+}
+.form-outline {
+    margin-bottom: 20px;
+}
