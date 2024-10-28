@@ -32,7 +32,7 @@ from django.urls import reverse_lazy
 from .models import Event
 from .forms import EventForm
 from django.shortcuts import render
-import logging
+from django.views.generic import DetailView
 
 
 class AddEventView(LoginRequiredMixin, CreateView):
@@ -62,5 +62,7 @@ class EventListView(ListView):
     template_name = "event/event_list.html"  # Créez ce template
     context_object_name = 'events'  # Le nom de la variable dans le template
 
-   
-   
+class EventDetailView(DetailView):
+    model = Event
+    template_name = "event/event_detail.html"  # Nom du template pour afficher les détails
+    context_object_name = "event"

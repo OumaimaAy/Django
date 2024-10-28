@@ -23,7 +23,7 @@
                     <img class="postcard__img" src="{{ event.image.url }}" alt="{{ event.title }}" />
                 </a>
                 <div class="postcard__text">
-                    <h1 class="postcard__title blue"><a href="#">{{ event.title }}</a></h1>
+                    <h1 class="postcard__title blue"><a href="{% url 'eventDetail' event.id %}">{{ event.title }}</a></h1>
                     <div class="postcard__subtitle small">
                         <time datetime="{{ event.evt_date|date:'Y-m-d H:i:s' }}">
                             <i class="fas fa-calendar-alt mr-2"></i>{{ event.evt_date|date:"D, M jS Y" }}

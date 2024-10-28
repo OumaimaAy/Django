@@ -12,6 +12,7 @@ urlpatterns = [
         path('add/', AddEventView.as_view(), name='addEvent'),  # Correctly reference the class
         path('events/', EventListView.as_view(), name='eventList'),  # Ajoutez cette ligne
             path('', landing_page, name='landing_page'),  # Home page
+            path('events/<int:pk>/', EventDetailView.as_view(), name='eventDetail'),  # Route de la page de détails
 
 
     # path('details/<int:ide>' , detailsEvent , name="details"),
