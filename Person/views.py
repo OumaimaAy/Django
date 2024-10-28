@@ -36,7 +36,7 @@ def register(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Vous êtes maintenant inscrit !")
-            return redirect("home")
+            return redirect("landing_page")
         else:
             # Boucle à travers les erreurs de validation
             for field, errors in form.errors.items():
@@ -66,7 +66,7 @@ def login_user(request):
         if user is not None:
             login(request, user)
             messages.success(request, "Vous êtes maintenant connecté !")
-            return redirect("home")
+            return redirect("landing_page")
         else:
             # Utilise Google Gemini pour générer un message d'erreur humoristique
             prompt_text = "Générer un seul message d'erreur humoristique et court pour un mot de passe incorrect."

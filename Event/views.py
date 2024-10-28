@@ -23,6 +23,7 @@ print("Loading views.py")
 # import io
 # from PIL import Image  
 
+from venv import logger
 from django.views.generic import ListView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -30,6 +31,10 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from .models import Event
 from .forms import EventForm
+from django.shortcuts import render
+import logging
+
+
 class AddEventView(LoginRequiredMixin, CreateView):
     model = Event
     template_name = "event/add.html"
@@ -45,6 +50,10 @@ class AddEventView(LoginRequiredMixin, CreateView):
         return super().form_invalid(form)
 
 
+def landing_page(request):
+    events = Event.objects.all()  # Récupère tous les événements
+
+    return render(request, 'index.html', {'events': events})
     
 
 
@@ -52,3 +61,6 @@ class EventListView(ListView):
     model = Event
     template_name = "event/event_list.html"  # Créez ce template
     context_object_name = 'events'  # Le nom de la variable dans le template
+
+   
+   

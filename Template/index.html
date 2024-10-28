@@ -148,131 +148,28 @@
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pb-60 col-lg-10">
 							<div class="title text-center">
-								<h1 class="mb-10">Ongoing Exhibitions from the scratch</h1>
-								<p>Who are in extremely love with eco friendly system.</p>
+								<h1 class="mb-10">Our Events</h1>
+								<p>Participate Now</p>
 							</div>
 						</div>
-					</div>						
-					<div class="row">
-						<div class="active-exibition-carusel">
-							<div class="single-exibition item">
-								<img src="img/e1.jpg" alt="">
-								<ul class="tags">
-									<li><a href="#">Travel</a></li>
-									<li><a href="#">Life style</a></li>
-								</ul>
-								<a href="#"><h4>Portable latest blog for women</h4></a>
-								<p>
-									Lorem ipsum dolor sit amet, consec teturadip isicing elit, sed do eiusmod tempor.
-								</p>
-								<h6 class="date">31st January, 2018</h6>
-							</div>
-
-							<div class="single-exibition item">
-								<img src="img/e2.jpg" alt="">
-								<ul class="tags">
-									<li><a href="#">Travel</a></li>
-									<li><a href="#">Life style</a></li>
-								</ul>
-								<a href="#"><h4>Portable latest blog for women</h4></a>
-								<p>
-									Lorem ipsum dolor sit amet, consec teturadip isicing elit, sed do eiusmod tempor.
-								</p>
-								<h6 class="date">31st January, 2018</h6>
-							</div>
-
-							<div class="single-exibition item">
-								<img src="img/e3.jpg" alt="">
-								<ul class="tags">
-									<li><a href="#">Travel</a></li>
-									<li><a href="#">Life style</a></li>
-								</ul>
-								<a href="#"><h4>Portable latest blog for women</h4></a>
-								<p>
-									Lorem ipsum dolor sit amet, consec teturadip isicing elit, sed do eiusmod tempor.
-								</p>
-								<h6 class="date">31st January, 2018</h6>
-							</div>							
-							<div class="single-exibition item">
-								<img src="img/e1.jpg" alt="">
-								<ul class="tags">
-									<li><a href="#">Travel</a></li>
-									<li><a href="#">Life style</a></li>
-								</ul>
-								<a href="#"><h4>Portable latest blog for women</h4></a>
-								<p>
-									Lorem ipsum dolor sit amet, consec teturadip isicing elit, sed do eiusmod tempor.
-								</p>
-								<h6 class="date">31st January, 2018</h6>
-							</div>
-
-							<div class="single-exibition item">
-								<img src="img/e2.jpg" alt="">
-								<ul class="tags">
-									<li><a href="#">Travel</a></li>
-									<li><a href="#">Life style</a></li>
-								</ul>
-								<a href="#"><h4>Portable latest blog for women</h4></a>
-								<p>
-									Lorem ipsum dolor sit amet, consec teturadip isicing elit, sed do eiusmod tempor.
-								</p>
-								<h6 class="date">31st January, 2018</h6>
-							</div>
-
-							<div class="single-exibition item">
-								<img src="img/e3.jpg" alt="">
-								<ul class="tags">
-									<li><a href="#">Travel</a></li>
-									<li><a href="#">Life style</a></li>
-								</ul>
-								<a href="#"><h4>Portable latest blog for women</h4></a>
-								<p>
-									Lorem ipsum dolor sit amet, consec teturadip isicing elit, sed do eiusmod tempor.
-								</p>
-								<h6 class="date">31st January, 2018</h6>
-							</div>							
-							<div class="single-exibition item">
-								<img src="img/e1.jpg" alt="">
-								<ul class="tags">
-									<li><a href="#">Travel</a></li>
-									<li><a href="#">Life style</a></li>
-								</ul>
-								<a href="#"><h4>Portable latest blog for women</h4></a>
-								<p>
-									Lorem ipsum dolor sit amet, consec teturadip isicing elit, sed do eiusmod tempor.
-								</p>
-								<h6 class="date">31st January, 2018</h6>
-							</div>
-
-							<div class="single-exibition item">
-								<img class="img-fluid" src="img/e2.jpg" alt="">
-								<ul class="tags">
-									<li><a href="#">Travel</a></li>
-									<li><a href="#">Life style</a></li>
-								</ul>
-								<a href="#"><h4>Portable latest blog for women</h4></a>
-								<p>
-									Lorem ipsum dolor sit amet, consec teturadip isicing elit, sed do eiusmod tempor.
-								</p>
-								<h6 class="date">31st January, 2018</h6>
-							</div>
-
-							<div class="single-exibition item">
-								<img class="img-fluid" src="img/e3.jpg" alt="">
-								<ul class="tags">
-									<li><a href="#">Travel</a></li>
-									<li><a href="#">Life style</a></li>
-								</ul>
-								<a href="#"><h4>Portable latest blog for women</h4></a>
-								<p>
-									Lorem ipsum dolor sit amet, consec teturadip isicing elit, sed do eiusmod tempor.
-								</p>
-								<h6 class="date">31st January, 2018</h6>
-							</div>
-						</div>													
 					</div>
-				</div>	
+					<div class="row">
+						{% for event in events %}
+							<div class="col-lg-4 col-md-6">
+								<div class="single-exibition item">
+									<img src="{{ event.image.url }}" alt="{{ event.title }}" class="img-fluid">
+									<h4>{{ event.title }}</h4>
+									<p>{{ event.description }}</p>
+									<h6 class="date">{{ event.evt_date|date:"dS F, Y" }}</h6>
+								</div>
+							</div>
+						{% empty %}
+							<p class="text-center">Aucun événement trouvé.</p>
+						{% endfor %}
+					</div>
+				</div>
 			</section>
+			
 			<!-- End exibition Area -->			
 		
 			<!-- Start upcoming-event Area -->
@@ -410,36 +307,6 @@
 			</section>
 			<!-- End blog Area -->
 
-			<!-- Start gallery Area -->
-			<section class="gallery-area section-gap" id="gallery">
-				<div class="container">
-					<div class="row d-flex justify-content-center">
-						<div class="menu-content pb-70 col-lg-8">
-							<div class="title text-center">
-								<h1 class="mb-10 text-white">Our Exhibition Gallery</h1>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua.</p>
-							</div>
-						</div>
-					</div>						
-					<div id="grid-container" class="row">
-						<a class="single-gallery" href="img/g1.jpg"><img class="grid-item" src="img/g1.jpg"></a>
-						<a class="single-gallery" href="img/g2.jpg"><img class="grid-item" src="img/g2.jpg"></a>
-						<a class="single-gallery" href="img/g3.jpg"><img class="grid-item" src="img/g3.jpg"></a>
-						<a class="single-gallery" href="img/g4.jpg"><img class="grid-item" src="img/g4.jpg"></a>
-						<a class="single-gallery" href="img/g5.jpg"><img class="grid-item" src="img/g5.jpg"></a>
-						<a class="single-gallery" href="img/g6.jpg"><img class="grid-item" src="img/g6.jpg"></a>
-						<a class="single-gallery" href="img/g7.jpg"><img class="grid-item" src="img/g7.jpg"></a>
-						<a class="single-gallery" href="img/g8.jpg"><img class="grid-item" src="img/g8.jpg"></a>
-						<a class="single-gallery" href="img/g9.jpg"><img class="grid-item" src="img/g9.jpg"></a>
-						<a class="single-gallery" href="img/g10.jpg"><img class="grid-item" src="img/g10.jpg"></a>
-						<a class="single-gallery" href="img/g11.jpg"><img class="grid-item" src="img/g11.jpg"></a>
-						<a class="single-gallery" href="img/g12.jpg"><img class="grid-item" src="img/g12.jpg"></a>
-						<a class="single-gallery" href="img/g4.jpg"><img class="grid-item" src="img/g4.jpg"></a>
-						<a class="single-gallery" href="img/g5.jpg"><img class="grid-item" src="img/g5.jpg"></a>						
-					</div>	
-				</div>	
-			</section>
-			<!-- End gallery Area -->
 			
 
 			<!-- start footer Area -->		
