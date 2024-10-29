@@ -1,0 +1,21 @@
+<!-- memberships/templates/memberships/membership_list.html -->
+{% extends "index.html" %}
+{% block content %}
+<br>
+ <br>   
+ <br>   
+ <br>   
+
+    <h1> Listes des abonnements : </h1>
+    <a href="{% url 'membership_create' %}">Créer un nouvelle abonnement</a>
+    <ul>
+        {% for membership in memberships %}
+            <li>{{ membership.membership_type }} ({{ membership.start_date }} - {{ membership.end_date }}) 
+                <!-- <a href="{% url 'membership_update' membership.pk %}">Modifier</a> -->
+                <a href="{% url 'membership_delete' membership.pk %}">Supprimer </a>
+            </li>
+        {% empty %}
+            <li>No memberships available.</li>
+        {% endfor %}
+    </ul>
+    {% endblock %}

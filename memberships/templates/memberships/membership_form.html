@@ -1,0 +1,14 @@
+<!-- memberships/templates/memberships/membership_form.html -->
+
+{% extends "index.html" %} <!-- Extends the main layout -->
+
+{% block title %}Create Membership{% endblock %}
+
+{% block content %}
+<h2>Create a New Membership</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Membership</button>
+</form>
+{% endblock %}

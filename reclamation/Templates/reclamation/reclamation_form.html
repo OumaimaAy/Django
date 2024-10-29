@@ -1,0 +1,42 @@
+<!-- reclamation_form.html -->
+{% extends "index.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h1 class="mb-0">
+                {% if form.instance.pk %} Edit Reclamation {% else %} Create New Reclamation {% endif %}
+            </h1>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                </div>
+                <div class="mb-3">
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+                </div>
+                <div class="mb-3">
+                    {{ form.priority.label_tag }}
+                    {{ form.priority }}
+                </div>
+                <div class="mb-3">
+                    {{ form.category.label_tag }}
+                    {{ form.category }}
+                </div>
+                <div class="mb-3">
+                    {{ form.attachment.label_tag }}
+                    {{ form.attachment }}
+                </div>
+                <button type="submit" class="btn btn-success">Save</button>
+                <a href="{% url 'reclamation-list' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

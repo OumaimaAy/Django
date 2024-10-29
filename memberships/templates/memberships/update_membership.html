@@ -1,0 +1,12 @@
+<!-- memberships/templates/memberships/update_membership.html -->
+<h2>Update Membership</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="membership_type">Choose Membership Type:</label>
+    <select name="membership_type" id="membership_type">
+        <option value="ST">Standard</option>
+        <option value="PR">Premium</option>
+        <option value="VIP">VIP</option>
+    </select>
+    <button type="submit">Update</button>
+</form>
