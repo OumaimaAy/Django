@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="fr">
@@ -28,7 +29,7 @@
     </style>
     <title>Liste des Événements</title>
     <div class="text-center my-4">
-        <a href="{% url 'addEvent' %}" class="btn btn-primary">Ajouter un Événement</a>
+        <a href="{% if user.is_authenticated %}{% url 'addEvent' %}{% else %}{% url 'register' %}{% endif %}" class="btn btn-primary">Ajouter un Événement</a>
     </div>
 </head>
 <body>
@@ -37,7 +38,7 @@
             <h1 class="text-center" id="pageHeaderTitle">Liste des Événements</h1>
             {% if not user.is_authenticated %}
     <div class="alert alert-warning text-center">
-        Vous devez être connecté pour voir les détails des événements. <a href="{% url 'register' %}">Inscrivez-vous ici</a>.
+        Vous devez être connecté pour ajouter des evennements ou voir les détails des événements. <a href="{% url 'register' %}">Inscrivez-vous ici</a>.
     </div>
 {% endif %}
             <form method="get" action="{% url 'eventList' %}" class="text-center my-4">

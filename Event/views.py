@@ -71,7 +71,6 @@ def suggestion_view(request):
     print(f"User input: '{user_input}'")
     suggestions = []
 
-    # Fetch events from the database
     events = Event.objects.all()  # Modify this query based on your requirements
     event_titles = [event.title for event in events]
 

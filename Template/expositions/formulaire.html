@@ -1,0 +1,14 @@
+<h1>{% if form.instance.pk %}Modifier{% else %}Ajouter{% endif %} une Exposition</h1>
+<form method="post" enctype="multipart/form-data"> <!-- Ajout de l'attribut enctype pour le téléchargement d'images -->
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <div>
+        <label for="id_image">Image :</label>
+        <input type="file" name="image" id="id_image" accept="image/*"> <!-- Champ pour le téléchargement de l'image -->
+    </div>
+
+    <button type="submit">Enregistrer</button>
+</form>
+
+<a href="{% url 'liste_expositions' %}">Annuler</a>

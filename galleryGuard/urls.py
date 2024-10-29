@@ -12,6 +12,8 @@ urlpatterns = [
     path('', index, name='home'),  # Route pour la page d'accueil
     path('admin/', admin.site.urls),  # Add this line   
     path('event/' , include('Event.urls') ),
+    path('exposition/' , include('exposition.urls') ),
+    path('reclamations/', include('reclamation.urls')),
 
    
 ]
