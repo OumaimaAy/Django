@@ -6,16 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/listevent.css' %}">
+    <style>
+        /* Add some custom styles for suggestions */
+        #suggestions {
+            border: 1px solid #ccc;
+            background: white;
+            max-height: 200px; /* Limit height for scrolling */
+            overflow-y: auto; /* Enable scrolling */
+            position: absolute; /* Position it below the input */
+            z-index: 1000; /* Ensure it appears above other content */
+            width: calc(100% - 2rem); /* Full width minus padding */
+            margin-top: 0.5rem;
+        }
+        .suggestion-item {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+        .suggestion-item:hover {
+            background-color: #f0f0f0; /* Highlight on hover */
+        }
+    </style>
     <title>Liste des Événements</title>
     <div class="text-center my-4">
         <a href="{% url 'addEvent' %}" class="btn btn-primary">Ajouter un Événement</a>
     </div>
-    
 </head>
 <body>
     <section class="light">
         <div class="container py-4">
             <h1 class="text-center" id="pageHeaderTitle">Liste des Événements</h1>
+            {% if not user.is_authenticated %}
+    <div class="alert alert-warning text-center">
+        Vous devez être connecté pour voir les détails des événements. <a href="{% url 'register' %}">Inscrivez-vous ici</a>.
+    </div>
+{% endif %}
+            <form method="get" action="{% url 'eventList' %}" class="text-center my-4">
+                <input type="text" id="searchInput" placeholder="Vous pouvez avoir des suggestions ci-dessous" autocomplete="off" class="form-control mb-2">
+                <input type="text" name="q" placeholder="Rechercher un événement" class="form-control mb-2" value="{{ request.GET.q }}">
+                <button type="submit" class="btn btn-primary mt-2">Rechercher</button>
+                <div id="suggestionMessage" style="display:none; margin-top: 0.5rem; font-weight: bold;">Vous pouvez avoir des suggestions ci-dessous :</div> <!-- Message for suggestions -->
+                <div id="suggestions" class="mt-2"></div> <!-- Added margin-top for suggestions -->
+            </form>
+                        
 
             {% for event in events %}
             <article class="postcard dark blue">
@@ -23,7 +55,9 @@
                     <img class="postcard__img" src="{{ event.image.url }}" alt="{{ event.title }}" />
                 </a>
                 <div class="postcard__text">
-                    <h1 class="postcard__title blue"><a href="{% url 'eventDetail' event.id %}">{{ event.title }}</a></h1>
+                    <h1 class="postcard__title blue"><a href="{% if user.is_authenticated %}{% url 'eventDetail' event.id %}{% else %}{% url 'register' %}{% endif %}">{{ event.title }}</a></h1>
+                        {{ event.title }}
+                    </a>
                     <div class="postcard__subtitle small">
                         <time datetime="{{ event.evt_date|date:'Y-m-d H:i:s' }}">
                             <i class="fas fa-calendar-alt mr-2"></i>{{ event.evt_date|date:"D, M jS Y" }}
@@ -42,13 +76,52 @@
             {% endfor %}
         </div>
     </section>
+
+    {% include 'footer.html' %}
+
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const query = this.value;
+            const suggestionMessage = document.getElementById('suggestionMessage');
+            const suggestionBox = document.getElementById('suggestions');
+            suggestionBox.innerHTML = ''; // Clear previous suggestions
+
+
+            if (query.length > 2) {  // Limite pour déclencher la suggestion
+                const suggestionsUrl = "{% url 'suggestions' %}";
+                fetch(`${suggestionsUrl}?q=${query}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.text().then(text => { 
+                                throw new Error(`Request failed: ${response.status} - ${text}`); 
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const suggestionBox = document.getElementById('suggestions');
+                        suggestionBox.innerHTML = '';
+                        data.suggestions.forEach(suggestion => {
+                            const suggestionElement = document.createElement('div');
+                            suggestionElement.textContent = suggestion;
+                            suggestionElement.className = 'suggestion-item'; // Add the class for styling
+                            suggestionElement.onclick = function() {
+                                document.getElementById('searchInput').value = suggestion; // Populate the input on click
+                                suggestionBox.innerHTML = ''; // Clear suggestions
+                            };
+                            suggestionBox.appendChild(suggestionElement);
+                        });
+                    })
+                    .catch(error => console.error("Erreur lors de la récupération des suggestions :", error));
+            } else {
+                document.getElementById('suggestions').innerHTML = ''; // Clear suggestions if input is too short
+            }
+        });
+    </script>
+
+    <script>
+        // Met à jour l'année dans le footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
 </body>
-
-{% include 'footer.html' %}
-
-
-<script>
-    // Met à jour l'année dans le footer
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-</script>
 </html>

@@ -7,8 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/register.css' %}">  <!-- Votre fichier CSS -->
-
     <title>Inscription</title>
+    <style>
+        /* Custom styles for alerts */
+        .alert {
+            margin-bottom: 1rem; /* Add spacing between alerts */
+            border-radius: 0.5rem; /* Rounded corners */
+        }
+    </style>
 </head>
 <body>
 {% block content %}
@@ -27,12 +33,14 @@
               <div class="card-body p-md-5 text-black">
                 <h3 class="mb-5 text-uppercase">Inscription</h3>
 
-                <!-- Afficher les messages de succès ou d'erreur -->
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                    {% endfor %}
-                {% endif %} 
+                <!-- Afficher les messages de succès ou d'erreur en haut -->
+                <div class="mb-4">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} text-center">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
 
                 <form method="POST" novalidate>
                     {% csrf_token %}
@@ -70,7 +78,6 @@
 </body>
 
 {% include 'footer.html' %}
-
 
 <script>
     // Met à jour l'année dans le footer

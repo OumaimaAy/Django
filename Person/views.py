@@ -42,7 +42,7 @@ def register(request):
             for field, errors in form.errors.items():
                 for error in errors:
                     # Utilise Google Gemini pour générer un message d'erreur personnalisé
-                    prompt_text = f"Générer un conseille tres court pour le champ '{field}' avec le message d'erreur suivant : '{error}'"
+                    prompt_text = f"Générer un conseille tres court pour le champ '{field}' avec le message d'erreur suivant : '{error}' et une conseille pour renforcer le mot de passe"
                     try:
                         response = genai.GenerativeModel('gemini-1.5-flash').generate_content(prompt_text)
                         error_message = response.text if hasattr(response, 'text') else "Erreur de validation."

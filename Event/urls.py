@@ -1,6 +1,7 @@
 from django.urls import path
 from .forms import EventForm
 from .views import AddEventView  # Import the renamed class
+from . import views
 
 
 from .views import *
@@ -13,6 +14,7 @@ urlpatterns = [
         path('events/', EventListView.as_view(), name='eventList'),  # Ajoutez cette ligne
             path('', landing_page, name='landing_page'),  # Home page
             path('events/<int:pk>/', EventDetailView.as_view(), name='eventDetail'),  # Route de la page de détails
+          path('suggestions/', views.suggestion_view, name='suggestions'),
 
 
     # path('details/<int:ide>' , detailsEvent , name="details"),
